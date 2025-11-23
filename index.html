@@ -1,0 +1,63 @@
+<h4 className="font-semibold text-slate-200 text-sm leading-snug group-hover:text-white transition-colors">
+                                                    {quake.properties.place}
+                                                </h4>
+                                                <p className="text-xs text-slate-500 mt-1 font-mono">
+                                                    {formatTime(quake.properties.time)}
+                                                </p>
+                                            </div>
+                                            <div className={`flex flex-col items-center justify-center w-12 h-12 rounded-lg font-bold text-lg border shadow-sm ${getMagnitudeColor(quake.properties.mag)}`}>
+                                                {quake.properties.mag.toFixed(1)}
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="flex items-center justify-between text-xs text-slate-400 border-t border-slate-800 pt-3 mt-2">
+                                            <div className="flex items-center gap-1.5">
+                                                <Icon name="Waves" size={12} />
+                                                <span>{quake.geometry.coordinates[2]}km depth</span>
+                                            </div>
+                                            <span className="text-blue-500 group-hover:underline">Details &rarr;</span>
+                                        </div>
+                                        
+                                        <div className="absolute bottom-0 left-0 h-1 w-full bg-slate-800">
+                                            <div 
+                                                className={`h-full ${getMagnitudeBg(quake.properties.mag)}`} 
+                                                style={{ width: ${(quake.properties.mag / 9) * 100}% }}
+                                            ></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </main>
+
+                    {/* Footer with Developer Name */}
+                    <footer className="border-t border-slate-800/50 py-6 mt-8 bg-slate-900/30">
+                        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center justify-center gap-2">
+                            <div className="flex items-center gap-2 text-slate-500 text-sm">
+                                <Icon name="Code" size={16} />
+                                <span>Platform Development</span>
+                            </div>
+                            <p className="text-slate-400 text-sm font-medium">
+                                Developed by <a href="https://www.facebook.com/share/1DAajKHzG8/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors underline decoration-blue-400/30 hover:decoration-blue-300">M.Sharifi</a>
+                            </p>
+                            <p className="text-slate-600 text-xs mt-1">
+                                Data provided by USGS Earthquake Hazards Program
+                            </p>
+                        </div>
+                    </footer>
+
+                    {/* Detail Modal */}
+                    <Modal 
+                        isOpen={!!selectedQuake} 
+                        onClose={() => setSelectedQuake(null)} 
+                        quake={selectedQuake} 
+                    />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
